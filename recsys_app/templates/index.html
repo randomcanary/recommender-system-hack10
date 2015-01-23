@@ -1,0 +1,95 @@
+<html>
+  <head>
+    <title> Recommendr </title>  
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load staticfiles %}
+    <!-- This will find base.css in PROJECT_DIR/assets/ -->
+    <script src="{% static 'js/jquery-1.11.2.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+
+    
+  </head>
+
+  <body>
+      <div class="container"><!-- div1: list all the cases-->
+      <h3>All The Cases</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Client Name</th>
+ 
+          <th>Law Category</th>
+ 
+          <th>Lawyer</th>
+ 
+          <th>Rating</th>
+        </tr>
+      </thead>
+ 
+      <tbody>
+        {% for kase in kases %}  
+        <tr>
+          <td>{{kase.client}}</td>
+          <td>{{kase.typeoflaw}}</td>
+          <td>{{kase.lawyer}}</td>
+          <td>{{kase.rating}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+ 
+      <tbody></tbody>
+    </table>
+  </div><!-- end div1 -->
+    
+    <div>
+      <h3>Select a category {{postvar}}</h3>
+      <form action = "index.html" method="post" role="form" >
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="sel1">Select list (select one):</label>
+          <select class="form-control" id="sel1" name="lawvar" >
+           {% for lawtype in lawtypes %}
+            <option class="col-lg-1" name="lawvar"value="{{lawtype}}">{{ lawtype }}</option>
+           {% endfor %}
+           <input type='submit' name='submit' class="btn btn-default"/>
+          </select>
+        </div> 
+      </form>  
+    </div>  
+   
+   <div class="container"><!-- div3: list all the recommended lawyers -->
+      <h3>{{ recco_title }}</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>{{ recco_lawyers_colname1 }}</th>
+          <th>{{ recco_lawyers_colname2 }}</th>
+ 
+        </tr>
+      </thead>
+ 
+      <tbody>
+        {% for lwyer in lwyers %}  
+        <tr>
+          {% for element in lwyer %}
+          <td>{{ element }}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+ 
+      <tbody></tbody>
+    </table>
+  </div><!-- end div2 -->  
+   <!-- <div><!-- div 3
+        <label for="sel2">Select one or more categories (hold shift to select more than one):</label>
+        <select multiple class="form-control" id="sel2">
+            {% for lawtype in lawtypes %}
+            <option>{{lawtype}}</option>
+            {% endfor %}
+      </select>
+        
+    </div> <!-- end div 3-->
+  </body>
+</html>

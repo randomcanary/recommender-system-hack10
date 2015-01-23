@@ -1,0 +1,71 @@
+<html>
+  <head>
+    <title> Recommendr </title>  
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load staticfiles %}
+    <!-- This will find base.css in PROJECT_DIR/assets/ -->
+    <script src="{% static 'js/jquery-1.11.2.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    
+    
+    
+    
+  </head>
+
+  <body>
+      <div class="container"><!-- div1: list all the cases-->
+      <h3>All The Cases</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Client Name</th>
+ 
+          <th>Law Category</th>
+ 
+          <th>Lawyer</th>
+ 
+          <th>Rating</th>
+        </tr>
+      </thead>
+ 
+      <tbody>
+        {% for kase in kases %}  
+        <tr>
+          <td>{{kase.client}}</td>
+          <td>{{kase.typeoflaw}}</td>
+          <td>{{kase.lawyer}}</td>
+          <td>{{kase.rating}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+ 
+      <tbody></tbody>
+    </table>
+  </div><!-- end div2 -->
+    <!-- div 2 : Law Types Dropdown -->
+    <div class="container">
+      <h2>Recommendr</h2>
+      <p>Select a category</p>                                          
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Law Categories
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+        {% for lawtype in lawtypes %}
+          <li role="presentation"><a role="menuitem" tab1index="-1" href="#">{{lawtype}}</a></li>
+        {% endfor %}  
+         
+        </ul>
+      </div>
+    </div> <!-- end div2-->
+   <!-- <div><!-- div 3
+        <label for="sel2">Select one or more categories (hold shift to select more than one):</label>
+        <select multiple class="form-control" id="sel2">
+            {% for lawtype in lawtypes %}
+            <option>{{lawtype}}</option>
+            {% endfor %}
+      </select>
+        
+    </div> <!-- end div 3-->
+  </body>
+</html>
