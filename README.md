@@ -1,4 +1,4 @@
-What is this? It's a quick-and-drty example of a recommender system, implemented in Django. 
+What is this? It's a quickish example of a recommender system, implemented in Django. 
 
 You can see it in action here: https://recsys-dredd-randomcanary.c9.io/index.html
 
