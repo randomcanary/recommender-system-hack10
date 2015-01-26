@@ -5,7 +5,7 @@ import logging
 logging.basicConfig()
 logger = logging.getLogger(__name__)
 
-def getReccos(lawtype):
+def getRecommendations(lawtype):
     cases = Case.objects.filter(typeoflaw=lawtype)
     lawyer_scores = {}
     for case in cases:
@@ -16,10 +16,10 @@ def getReccos(lawtype):
     return sorted_scores
         
 def index(request):
-    if request.method == "POST":
+    if request.method == "POST": #if user selects a law category
         selectedLawType = request.POST['lawvar']
-        lwyers = getReccos(selectedLawType)
-        logger.error("lwers!!! : {}".format(lwyers))
+        lwyers = getRecommendations(selectedLawType)
+        #logger.error("lwers : {}".format(lwyers))
         recco_title = "Recommended Lawyers"
         recco_lawyers_colname1 = "Lawyer Name"
         recco_lawyers_colname2 = "Lawyer Score"
